@@ -1,7 +1,7 @@
 {
     "type": "library",
     "name": "autoframe/components-ftp-transfer",
-    "description": "Transfer files/folders from local to ftp with php. Resumable, cli ftp, upload progress Autoframe Framework",
+    "description": "Transfer files/folders from local to ftp with php. Resumable transfers, cli ftp, upload progress...",
     "license": "MIT",
     "homepage": "https://github.com/autoframe",
     "require": {
