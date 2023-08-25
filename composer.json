@@ -1,0 +1,35 @@
+{
+    "type": "library",
+    "name": "autoframe/components-ftp-transfer",
+    "description": "Transfer files/folders from local to ftp with php. Resumable, cli ftp, upload progress Autoframe Framework",
+    "license": "MIT",
+    "homepage": "https://github.com/autoframe",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "autoframe/components-exception": "^1.0 || ^2.0"
+    },
+    "version": "1.0.1",
+    "authors": [
+        {
+            "name": "Nistor Alexandru Marius",
+            "homepage": "https://autoframe.ro",
+            "role": "Developer"
+        }
+    ],
+    "keywords": ["File System", "Looping", "FTP", "Recoursive copy", "Upload pregress"],
+    "autoload": {
+        "psr-4": {
+            "Autoframe\\Components\\FtpTransfer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Unit\\": "Tests/Unit"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6 || ^10"
+    },
+    "optimize-autoloader": true
+
+}
