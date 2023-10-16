@@ -6,7 +6,9 @@
     "homepage": "https://github.com/autoframe",
     "require": {
         "php": "^7.4 || ^8.0",
-        "autoframe/components-exception": "^1.0 || ^2.0"
+        "autoframe/components-filesystem": ">=2.0",
+        "ext-ftp": "*",
+        "autoframe/process-control": "^1.0"
     },
     "version": "1.0.1",
     "authors": [
