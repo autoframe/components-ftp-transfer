@@ -67,6 +67,7 @@ class AfrFtpBackupConfig
     public $mReportMixedA = null;
     public $mReportMixedS = null;
     public $mReportMixedI = null;
+    public int $iLogUploadProgressEveryXSeconds = 30;
 
     /**
      * @param string|null $sTodayFolderName

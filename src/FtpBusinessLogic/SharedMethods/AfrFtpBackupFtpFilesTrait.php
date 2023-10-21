@@ -14,6 +14,7 @@ trait AfrFtpBackupFtpFilesTrait
 
     protected array $aFileListFtp = [];
     protected string $ftpDs = '/';
+    protected int $iCalculateUploadProgressTs = 0;
     public string $ftpTimezone = 'UTC';
     protected AfrFtpConnectionInterface $oFtpConnection;
 
@@ -507,14 +508,14 @@ trait AfrFtpBackupFtpFilesTrait
      * @param string $sFrom
      * @param string $sTo
      * @param int $iCurrentRetry
-     * @param int $iMaxTimeout
      * @return bool
      */
-    protected function uploadFtpProgress(string $sFrom, string $sTo, int $iCurrentRetry = 1, int $iMaxTimeout = 90): bool
+    protected function uploadFtpProgress(string $sFrom, string $sTo, int $iCurrentRetry = 1): bool
     {
         if (!$this->oFtpConnection->getConnection()) {
             return false;
         }
+        $this->iCalculateUploadProgressTs = 0;
         $tStart = time();
         $iFileSize = (int)filesize($sFrom);
         $fp = fopen($sFrom, 'r');
@@ -549,7 +550,6 @@ trait AfrFtpBackupFtpFilesTrait
                     (int)ftell($fp),
                     $iFileSize,
                     $iLastPercent,
-                    $iMaxTimeout,
                     $tStart,
                     $iCurrentRetry,
                     $sFrom,
@@ -565,7 +565,6 @@ trait AfrFtpBackupFtpFilesTrait
             (int)ftell($fp),
             $iFileSize,
             $iLastPercent,
-            $iMaxTimeout,
             $tStart,
             $iCurrentRetry,
             $sFrom,
@@ -594,7 +593,6 @@ trait AfrFtpBackupFtpFilesTrait
      * @param int $iUploadedBytes
      * @param int $iFileSize
      * @param $iLastPercent
-     * @param int $iMaxTimeout
      * @param int $tStart
      * @param int $iCurrentRetry
      * @param string $sFrom
@@ -605,7 +603,6 @@ trait AfrFtpBackupFtpFilesTrait
         int    $iUploadedBytes,
         int    $iFileSize,
                &$iLastPercent,
-        int    $iMaxTimeout,
         int    $tStart,
         int    $iCurrentRetry,
         string $sFrom,
@@ -625,7 +622,6 @@ trait AfrFtpBackupFtpFilesTrait
             $iDecimals = $iLastPercent === 99.9999 || $dPercent >= 99.9999 ? 6 : 2;
             $iLastPercent = $iPercent;
 
-           // $sInfo = ' [Max timeout ' . $iMaxTimeout . ' seconds]';
             $sInfo = '';
             if ($dPercent) {
                 $iSeconds = max(time() - $tStart, 0.1);
@@ -655,12 +651,19 @@ trait AfrFtpBackupFtpFilesTrait
                     '[' . $sSeconds . ' @' . $dSpeed . ' MB/s]' .
                     '[left ~' . $sRemaining . ']';
             }
-            $this->ActionLog(
-                'info',
-                'Upload progress ' . $iLastPercent . '%' . $sInfo . ' (retry #' . $iCurrentRetry . ') $s to $d ' . date('H:i:s'),
-                $sFrom,
-                $sTo
-            );
+            if (
+                !$sInfo ||
+                time() > $this->iCalculateUploadProgressTs + $this->oFtpConfig->iLogUploadProgressEveryXSeconds
+            ) {
+                $this->ActionLog(
+                    'info',
+                    'Upload progress ' . $iLastPercent . '%' . $sInfo . ' (retry #' . $iCurrentRetry . ') $s to $d ' . date('H:i:s'),
+                    $sFrom,
+                    $sTo
+                );
+                $this->iCalculateUploadProgressTs = time();
+            }
+
         }
         return $dPercent;
     }
