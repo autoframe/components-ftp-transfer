@@ -1,0 +1,8 @@
+src/bpg.php
+composer.phar
+/vendor/
+composer.lock
+.phpunit.result.cache
+.phpunit.result
+.idea/
+*self.resume.php
