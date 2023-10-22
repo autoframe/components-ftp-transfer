@@ -1,9 +1,9 @@
 # Autoframe is a low level framework that is oriented on SOLID flexibility
 
-[![Build Status](https://github.com/autoframe/ftp-backup/workflows/PHPUnit-tests/badge.svg)](https://github.com/autoframe/ftp-backup/actions?query=branch:main)
-[![License: The 3-Clause BSD License](https://img.shields.io/github/license/autoframe/ftp-backup)](https://opensource.org/license/bsd-3-clause/)
-![Packagist Version](https://img.shields.io/packagist/v/autoframe/ftp-backup?label=packagist%20stable)
-[![Downloads](https://img.shields.io/packagist/dm/autoframe/ftp-backup.svg)](https://packagist.org/packages/autoframe/ftp-backup)
+[![Build Status](https://github.com/autoframe/components-ftp-transfer/workflows/PHPUnit-tests/badge.svg)](https://github.com/autoframe/components-ftp-transfer/actions?query=branch:main)
+[![License: The 3-Clause BSD License](https://img.shields.io/github/license/autoframe/components-ftp-transfer)](https://opensource.org/license/bsd-3-clause/)
+![Packagist Version](https://img.shields.io/packagist/v/autoframe/components-ftp-transfer?label=packagist%20stable)
+[![Downloads](https://img.shields.io/packagist/dm/autoframe/components-ftp-transfer.svg)](https://packagist.org/packages/autoframe/components-ftp-transfer)
 
 *PHP File copy to FTP protocol via CLI uploader and reporter*
 
