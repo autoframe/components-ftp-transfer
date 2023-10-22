@@ -64,7 +64,8 @@ class AfrFtpPutBigDataFacade implements AfrFtpBusinessLogicInterface
             }
             /** @var AfrFtpPutBigData $oUploader */
             /** @var AfrFtpBusinessLogicInterface $oUploaderX */
-            $oUploader = new ($this->oFtpConfig->getBusinessLogic())(
+            $AfrFtpBusinessLogicInterfaceConcrete = $this->oFtpConfig->getBusinessLogic();
+            $oUploader = new $AfrFtpBusinessLogicInterfaceConcrete(
                 $this->oFtpConfig,
                 $this->xetAfrFtpLog(),
                 $this->xetAfrLock()
